@@ -43,6 +43,8 @@ void Engine::launch(){
 
 	// Note: No Object events inside main loop !
 
+	// TODO: Framerate limit
+	
 	while(window->is_open()){
 		window->clear(Color::BLACK);
 
