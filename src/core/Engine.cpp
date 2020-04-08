@@ -1,7 +1,7 @@
 #include "core/Engine.h"
 
 // GLFW Error callback
-void glfw_error_callback(int error, const char* description){
+void glfw_error_callback(int error, const char * description){
 	Engine::get_instance().error(description);
 }
 
@@ -33,11 +33,6 @@ double Engine::get_fps(){
 
 void Engine::launch(){
 	Input & input = Input::get_instance();
-
-	// Debug
-	input.on("mouse_moved", [&input](){
-		input.print("mouse_moved " + input.get_mouse_position().to_string());
-	});
 	
 	loop_timer.restart();
 
@@ -51,6 +46,10 @@ void Engine::launch(){
 		glfwSwapBuffers(window->context);
 
 		input.poll_events();
+
+		// Process
+
+		// Draw
 
 		fps = 1.0 / loop_timer.restart().seconds();
 	}

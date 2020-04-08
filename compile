@@ -1,6 +1,10 @@
 g++ -std=c++17 \
 main.cpp -o bin/knot \
 src/**/*.cpp src/**/**/*.cpp \
+-I./thirdparty/lua53/include \
+-L./thirdparty/lua53/lib \
+-llua53 \
+-I./thirdparty/sol2/include \
 -I./thirdparty/glad \
 thirdparty/glad/glad.c \
 -I./thirdparty/GLFW/include \
