@@ -1,0 +1,5 @@
+app_name = MY_PROJECT
+
+window_width = 720
+window_height = 480
+window_style = 0

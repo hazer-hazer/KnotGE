@@ -40,12 +40,10 @@ Window * Input::get_window() const {
 	return window;
 }
 
-void Input::poll_events(){
+void Input::process_input(){
 	if(window == nullptr){
 		throw "Failed to poll events, Input's window was not set";
 	}
-
-	glfwPollEvents();
 }
 
 // TODO: Return 0, 0 if cursor is disabled

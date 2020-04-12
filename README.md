@@ -15,7 +15,3 @@ Stores Node script.
 ## Issue helpers
 
 - No Object Events inside loop functions
-
-## Notes
-
-- `project` folder files mostly not in use, bacause of switching from lua to self-written script language.

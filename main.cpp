@@ -1,25 +1,19 @@
 #include "core/Engine.h"
-#include "project/ProjectSettings.h"
+#include "project/ProjectFile.h"
 
 #include <iostream>
 
-int main() {
+int main(int argc, const char * argv[]) {
 	using namespace std;
 
 	try{
-		ProjectSettings settings(".");
+		Engine & engine = Engine::get_instance();
+		engine.init(argc, argv);
 
-		cout << "ProjectSettings: \n" << settings.to_string() << endl;
-
-		// Engine & engine = Engine::get_instance();
-
-		// engine.launch();
+		engine.launch();
 	}catch(std::string message){
 		cout << message << endl;
-	}catch(const char * message){
-		cout << message << endl;
 	}
-
-	glfwTerminate();
+	
     return 0;
 }

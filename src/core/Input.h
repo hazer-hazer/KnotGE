@@ -4,7 +4,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "core/WindowManager.h"
+#include "core/Window.h"
 #include "core/Object.h"
 #include "core/math/Vector2.h"
 
@@ -36,7 +36,7 @@ class Input : public Object {
 	// Events
 	// Poll events must be called after setting window
 	public:
-		void poll_events();
+		void process_input();
 
 		// void key_event_callback(GLFWwindow * window, int key, int scancode, int action, int mods);
 

@@ -5,9 +5,11 @@
 #include <GLFW/glfw3.h>
 
 #include "core/Object.h"
-#include "core/WindowManager.h"
+#include "core/Window.h"
 #include "core/Input.h"
 #include "core/Timer.h"
+#include "servers/VisualServer.h"
+#include "project/ProjectFile.h"
 
 class Engine : public Object {
 	
@@ -25,6 +27,9 @@ class Engine : public Object {
 		Engine & operator = (Engine &&) 		= delete;
 
 		static Engine & get_instance();
+
+	public:
+		void init(int argc, const char * argv[]);
 
 	// Window
 	private:
