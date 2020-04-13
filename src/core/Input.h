@@ -42,7 +42,7 @@ class Input : public Object {
 
 	// Mouse
 	public:
-		Vector2 get_mouse_position() const;
+		V2d get_mouse_position() const;
 };
 
 #endif // INPUT_H

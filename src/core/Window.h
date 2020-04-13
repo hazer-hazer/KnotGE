@@ -13,6 +13,7 @@
 
 #include "core/Object.h"
 #include "core/Color.h"
+#include "core/math/Vector2.h"
 
 #define WINDOW_DEFAULT_STYLE 1
 
@@ -48,6 +49,8 @@ struct Window : public Object {
 
 	GLFWwindow * context;
 
+	void destroy();
+
 	bool is_open();
 	
 	void close(const bool & close_opt = true);
@@ -56,9 +59,16 @@ struct Window : public Object {
 
 	void set_title(const char * title);
 
+	// Visibility
+	bool is_visible() const;
+	void set_visible(const bool & visible = true);
+	void show();
+	void hide();
+	void toggle();
+
 	// Size
-	void set_size(const Vector2 & size);
-	Vector2 get_size() const;
+	void set_size(const V2i & size);
+	V2i get_size() const;
 
 	// Style methods
 	void set_style(const uint8_t & style);
@@ -69,6 +79,20 @@ struct Window : public Object {
 	void set_always_on_top(const bool & always_on_top = true);
 
 	bool is_fullscreen() const;
+
+	// Opacity
+	void set_opacity(const float & opacity);
+
+	// Callbacks
+	static void size_callback(GLFWwindow * window, int width, int height){
+		void * ctx_ptr = glfwGetWindowUserPointer(window);
+		if (Window * win_ptr = static_cast<Window*>(ctx_ptr)){
+			win_ptr->emit("resized");
+		}
+	}
+	static void framebuffer_callback(GLFWwindow * window, int width, int height){
+		glViewport(0, 0, width, height);
+	}
 };
 
 #endif

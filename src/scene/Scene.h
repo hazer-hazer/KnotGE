@@ -19,6 +19,15 @@ class Scene : public Object {
 	private:
 		Node * root;
 
+	// Pause
+	public:
+		void set_pause(bool pause = true);
+		bool is_paused() const;
+
+	private:
+		bool _paused = false;
+
+	// Tree
 	public:
 		// Go through tree starting at given root
 		// and calling given function with casted Node.

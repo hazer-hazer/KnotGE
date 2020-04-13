@@ -47,8 +47,8 @@ void Input::process_input(){
 }
 
 // TODO: Return 0, 0 if cursor is disabled
-Vector2 Input::get_mouse_position() const {
-	double xpos, ypos;
-	glfwGetCursorPos(window->context, &xpos, &ypos);
-	return Vector2(xpos, ypos);
+V2d Input::get_mouse_position() const {
+	V2d pos;
+	glfwGetCursorPos(window->context, &pos.x, &pos.y);
+	return pos;
 }

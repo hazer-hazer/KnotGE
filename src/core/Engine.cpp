@@ -51,7 +51,6 @@ void Engine::init(int argc, const char * argv[]){
 						project_settings.get<std::string>("name"),
 						window_style);
 
-
 	// Init glad
 	if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)){
 		error("Failed to initialize GLAD");

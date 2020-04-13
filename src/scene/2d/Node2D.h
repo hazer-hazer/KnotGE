@@ -1,19 +1,25 @@
 #ifndef NODE2D_H
 #define NODE2D_H
 
-#include "scene/2d/Drawable2D.h"
+#include "scene/Node.h"
 
-/**
- * Node2D - Drawable2D + tranformable
- */
-class Node2D : public Drawable2D {
+typedef std::function<void(void)> DrawFunction;
 
-	CLASS(Node2D, Drawable2D);
+class Node2D : public Node {
+
+	CLASS(Node2D, Node);
 
 	public:
 		Node2D();
 		virtual ~Node2D() = default;
 			
+	// Draw Function
+	public:
+		void set_draw(DrawFunction draw);
+		DrawFunction get_draw();
+
+	private:
+		DrawFunction _draw;
 };
 
 #endif // NODE2D_H

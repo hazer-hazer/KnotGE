@@ -11,14 +11,25 @@ Window::Window(const int & width,
 {
 	context = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
 
-	set_style(style); 
+	set_style(style);
 
 	glfwMakeContextCurrent(context);
+
+	// Set window pointer to this class
+    glfwSetWindowUserPointer(context, this);
 
 	if(context == nullptr){
 		error("Failed to create window");
 		glfwTerminate();
 	}
+
+	// Callbacks
+	glfwSetWindowSizeCallback(context, Window::size_callback);
+	glfwSetFramebufferSizeCallback(context, Window::framebuffer_callback);
+}
+
+void Window::destroy(){
+	glfwDestroyWindow(context);
 }
 
 bool Window::is_open(){
@@ -37,6 +48,42 @@ void Window::set_title(const char * title){
 	glfwSetWindowTitle(context, title);
 }
 
+// Visibility
+bool Window::is_visible() const {
+	return glfwGetWindowAttrib(context, GLFW_VISIBLE) == GLFW_TRUE;
+}
+
+void Window::set_visible(const bool & visible){
+	if(visible == is_visible()){
+		return;
+	}
+	toggle();
+}
+
+void Window::show(){
+	glfwShowWindow(context);
+}
+
+void Window::hide(){
+	glfwHideWindow(context);
+}
+
+void Window::toggle(){
+	is_visible() ? hide() : show();
+}
+
+// Size
+void Window::set_size(const V2i & size){
+	glfwSetWindowSize(context, size.x, size.y);
+}
+
+V2i Window::get_size() const {
+	V2i size;
+	glfwGetWindowSize(context, &size.x, &size.y);
+	return size;
+}
+
+// Style methods
 void Window::set_style(const uint8_t & style){
 	set_resizable(style & Window::Style::Resizable);
 
@@ -77,6 +124,11 @@ void Window::set_always_on_top(const bool & always_on_top){
 	glfwSetWindowAttrib(context, GLFW_FLOATING, always_on_top ? GLFW_TRUE : GLFW_FALSE);
 }
 
-bool Window::is_fullscreen(){
+bool Window::is_fullscreen() const {
 	return glfwGetWindowMonitor(context) != nullptr;
+}
+
+// Opacity
+void Window::set_opacity(const float & opacity){
+	glfwSetWindowOpacity(context, opacity);
 }
